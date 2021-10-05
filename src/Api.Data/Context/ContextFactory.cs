@@ -8,7 +8,7 @@ namespace Data.Context
 {
     public class ContextFactory : IDesignTimeDbContextFactory<MyContext>
     {
-        private IConfigurationRoot configuration;
+        private readonly IConfigurationRoot configuration;
         public ContextFactory(IConfigurationRoot _configuration)
         {
             configuration = _configuration;
@@ -16,11 +16,6 @@ namespace Data.Context
 
         public MyContext CreateDbContext(string[] args)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json")
-            .Build();
-
             // Find a way to get different connection string 
             var connectionString = configuration.GetConnectionString("Default");
 
