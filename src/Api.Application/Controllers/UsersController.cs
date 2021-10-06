@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Services.User;
+﻿using Domain.Entities;
+using Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,17 +14,23 @@ namespace Application.Controllers
     [Route("api/[controller]")]
     public class UsersController : Controller
     {
-
-        public async Task<ActionResult> GetAll([FromServices] IUserService service)
+        private readonly IUserService userService;
+        public UsersController(IUserService userService)
         {
-            if(!ModelState.IsValid)
+            this.userService = userService;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAll()
+        {
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
             try
             {
-                return (Ok(await service.GetAll()));
+                return Ok(await userService.GetAll());
             }
             catch (ArgumentException e)
             {
@@ -31,6 +38,53 @@ namespace Application.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
 
+        }
+
+        [HttpGet]
+        [Route("{id}", Name = "GetWithId")]
+        public async Task<ActionResult> Get(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                return Ok(await userService.Get(id));
+            }
+            catch (ArgumentException e)
+            {
+
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+        //http://localhost:19808/api/users
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] User entity)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                var result = await userService.Post(entity);
+                if (result != null)
+                {
+                    return Created(new Uri(Url.Link("GetWithId", new { id = result.Id })), result);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (ArgumentException e)
+            {
+
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
         }
 
         //// GET: UserController
