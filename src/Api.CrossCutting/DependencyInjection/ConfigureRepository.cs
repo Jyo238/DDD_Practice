@@ -4,12 +4,7 @@ using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CrossCutting.DependencyInjection
 {
@@ -25,8 +20,8 @@ namespace CrossCutting.DependencyInjection
 
             // Find a way to get different connection string 
             var connectionString = configuration.GetConnectionString("Default");
-
-            serviceCollection.AddDbContext<MyContext>(options => options.UseMySQL(connectionString));
+            var serverVersion = ServerVersion.AutoDetect(connectionString);
+            serviceCollection.AddDbContext<MyContext>(options => options.UseMySql(connectionString, serverVersion));
         }
     }
 }
