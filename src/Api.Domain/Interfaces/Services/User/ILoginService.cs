@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Dtos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Domain.Interfaces.Services.User
 {
     public interface ILoginService
     {
-        Task<Entities.User> FindByLogin(Entities.User user);
+        Task<Entities.User> FindByLogin(LoginDto user);
     }
 }

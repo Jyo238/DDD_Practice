@@ -1,9 +1,7 @@
-﻿using Domain.Entities;
+﻿using Domain.Dtos;
 using Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -19,7 +17,7 @@ namespace Application.Controllers
             this.loginService = loginService;
         }
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody]User user)
+        public async Task<IActionResult> Login([FromBody]LoginDto user)
         {
             if(!ModelState.IsValid)
             {
