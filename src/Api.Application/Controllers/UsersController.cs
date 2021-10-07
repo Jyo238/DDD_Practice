@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces.Services.User;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Application.Controllers
 {
+    [Authorize("Bearer")]
     [ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
@@ -21,6 +23,7 @@ namespace Application.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> GetAll()
         {
             if (!ModelState.IsValid)
