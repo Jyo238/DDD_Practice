@@ -13,6 +13,8 @@ using Microsoft.OpenApi.Models;
 using CrossCutting.DependencyInjection;
 using Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Domain.Security;
+using Microsoft.Extensions.Options;
 
 namespace Application
 {
@@ -31,6 +33,15 @@ namespace Application
             services.AddControllers();
             ConfigureService.ConfigureDependenciesService(services);
             ConfigureRepository.ConfigureDependenciesRepository(services);
+
+            var signingConfigurations = new SigningConfigurations();
+            services.AddSingleton(signingConfigurations);
+
+            var tokenConfigurations = new TokenConfigurations();
+            new ConfigureFromConfigurationOptions<TokenConfigurations>(
+                Configuration.GetSection("TokenConfigurations")).Configure(tokenConfigurations);
+            services.AddSingleton(tokenConfigurations);
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Application", Version = "v1" });
