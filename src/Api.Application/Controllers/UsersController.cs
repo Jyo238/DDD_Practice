@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using Domain.Dtos.User;
+using Domain.Entities;
 using Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -65,7 +66,7 @@ namespace Application.Controllers
         //http://localhost:19808/api/users
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] User entity)
+        public async Task<ActionResult> Post([FromBody] UserDto entity)
         {
             if (!ModelState.IsValid)
             {
@@ -93,7 +94,7 @@ namespace Application.Controllers
 
         [HttpPost]
         [Route("update")]
-        public async Task<ActionResult> Update([FromBody] User entity)
+        public async Task<ActionResult> Update([FromBody] UserDto entity)
         {
             if (!ModelState.IsValid)
             {

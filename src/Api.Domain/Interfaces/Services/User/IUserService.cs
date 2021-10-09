@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Dtos.User;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -6,11 +7,11 @@ namespace Domain.Interfaces.Services.User
 {
     public interface IUserService
     {
-        Task<Entities.User> Get(Guid id);
-        Task<IEnumerable<Entities.User>> GetAll();
+        Task<UserResponseDto> Get(Guid id);
+        Task<IEnumerable<UserResponseDto>> GetAll();
 
-        Task<Entities.User> Post(Entities.User user);
-        Task<Entities.User> Put(Entities.User user);
+        Task<UserResponseDto> Post(UserDto user);
+        Task<UserResponseDto> Put(UserDto user);
         Task<bool> Delete(Guid id);
     }
 }

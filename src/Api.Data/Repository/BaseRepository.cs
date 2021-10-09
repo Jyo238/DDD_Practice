@@ -13,7 +13,7 @@ namespace Data.Repository
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         protected readonly MyContext _context;
-        private DbSet<T> _dataSet;
+        private readonly DbSet<T> _dataSet;
         public BaseRepository(MyContext context)
         {
             _context = context;

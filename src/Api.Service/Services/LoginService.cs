@@ -18,9 +18,9 @@ namespace Service.Services
     public class LoginService : ILoginService
     {
         private readonly IUserRepository userRepository;
-        private SigningConfigurations signingConfigurations;
-        private TokenConfigurations tokenConfigurations;
-        private IConfiguration configuration;
+        private readonly SigningConfigurations signingConfigurations;
+        private readonly TokenConfigurations tokenConfigurations;
+        private readonly IConfiguration configuration;
         public LoginService(
             IUserRepository userRepository,
             SigningConfigurations signingConfigurations,
