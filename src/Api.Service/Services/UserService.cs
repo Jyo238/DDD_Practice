@@ -35,7 +35,7 @@ namespace Service.Services
             return _mapper.Map<IEnumerable<UserResponseDto>>(entities);
         }
 
-        public async Task<UserResponseDto> Post(UserDto user)
+        public async Task<UserResponseDto> Post(UserCreateDto user)
         {
             if (user.Name == "TEST") return null;
 
@@ -44,7 +44,7 @@ namespace Service.Services
             return _mapper.Map<UserResponseDto>(result);
         }
 
-        public async Task<UserResponseDto> Put(UserDto user)
+        public async Task<UserResponseDto> Put(UserUpdateDto user)
         {
             var entity = _mapper.Map<User>(user);
             var result = await _repository.UpdateAsync(entity);

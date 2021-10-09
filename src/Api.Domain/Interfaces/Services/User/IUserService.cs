@@ -10,8 +10,8 @@ namespace Domain.Interfaces.Services.User
         Task<UserResponseDto> Get(Guid id);
         Task<IEnumerable<UserResponseDto>> GetAll();
 
-        Task<UserResponseDto> Post(UserDto user);
-        Task<UserResponseDto> Put(UserDto user);
+        Task<UserResponseDto> Post(UserCreateDto user);
+        Task<UserResponseDto> Put(UserUpdateDto user);
         Task<bool> Delete(Guid id);
     }
 }
