@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CrossCutting.Mappings
 {
-    public class DtoToModelProfiles : Profile
+    public class DtoToEntityProfiles : Profile
     {
-        public DtoToModelProfiles()
+        public DtoToEntityProfiles()
         {
             CreateMap<User,UserDto>().ReverseMap();
             CreateMap<User, UserResponseDto>().ReverseMap();
