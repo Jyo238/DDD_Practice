@@ -63,6 +63,7 @@ namespace Application.Controllers
             }
         }
         //http://localhost:19808/api/users
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] User entity)
         {
