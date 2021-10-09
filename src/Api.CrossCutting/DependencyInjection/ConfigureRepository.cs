@@ -15,7 +15,7 @@ namespace CrossCutting.DependencyInjection
         public static void ConfigureDependenciesRepository(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped(typeof(IRepository<>),typeof(BaseRepository<>));
-            serviceCollection.AddScoped<IUserRepository,UserImplementation>();
+            serviceCollection.AddScoped<IUserRepository,UserRepository>();
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
